@@ -71,6 +71,13 @@ Options:
 
 ```
 
+## TODO
+* Support alternative authentication methods such as NTLM hashes and ccache files
+* Automatically run "certipy find" to find and grab templates vulnerable to ESC1
+* Add jitter and sleep options to avoid detection
+* Add type validation for all variables
+
+
 ## Acknowledgements
 * [puzzlepeaches](https://github.com/puzzlepeaches): Telling me to hurry up and write this
 * [ly4k](https://github.com/ly4k/Certipy): For Certipy
