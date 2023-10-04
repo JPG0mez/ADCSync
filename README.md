@@ -1,6 +1,6 @@
 # ADCSsync
 
-This is a tool I whipped up together quickly to DCSync utilizing ESC1. It is quite slow but otherwise an effective means of performing a makeshift DCSync attack without utilizing [DSRUAPI](https://www.thehacker.recipes/ad/movement/credentials/dumping/dcsync) or [Volume Shadow Copy](https://book.hacktricks.xyz/windows-hardening/stealing-credentials#volume-shadow-copy). 
+This is a tool I whipped up together quickly to DCSync utilizing ESC1. It is quite slow but otherwise an effective means of performing a makeshift DCSync attack without utilizing [DRSUAPI](https://www.thehacker.recipes/ad/movement/credentials/dumping/dcsync) or [Volume Shadow Copy](https://book.hacktricks.xyz/windows-hardening/stealing-credentials#volume-shadow-copy). 
 
 This is the first version of the tool and essentially just automates the process of running Certipy against every user in a domain. It still needs a lot of work and I plan on adding more features in the future for authentication methods and automating the process of finding a vulnerable template.
 
