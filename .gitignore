@@ -1,0 +1,7 @@
+# Ignore JSON files
+*.json
+
+# Ignore specific folders
+/caches/
+/certificates/
+
